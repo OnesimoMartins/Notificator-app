@@ -1,0 +1,18 @@
+package ao.martins.shoesclean.domain.repository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import ao.martins.shoesclean.domain.model.Pedido;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+public interface PedidoRepository extends JpaRepository<Pedido,Long>
+        , JpaSpecificationExecutor<Pedido> {
+
+    @Override
+    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH,value = "pedido_items_graph")
+    Page<Pedido> findAll(Specification spec, Pageable pageable);
+}
