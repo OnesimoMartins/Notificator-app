@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 @Component
-public class PedioEventsListener {
+public class PedidoEventsListener {
 
     @Autowired
     private PedidoService pedidoService;

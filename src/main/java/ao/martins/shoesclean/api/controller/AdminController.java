@@ -8,6 +8,5 @@ public class AdminController {
 
 	@PutMapping("desactivar-notificacoes-adiamento")
 	void desactivarNotificacoesAdiamento() {
-		
 	}
 }

@@ -19,3 +19,9 @@ create table pedido(
     status enum('CRIADO','CONCLUIDO','CANCELADO') not null default 'CRIADO',
     primary key(id)
 );
+create table item_pedido(
+    id varchar(36) not null unique,
+    pedido_id varchar(12) not null references pedido(id),
+    descricao varchar(150) not null,
+    primary key(id)
+);

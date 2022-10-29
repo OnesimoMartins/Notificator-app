@@ -1,22 +1,22 @@
 package ao.martins.shoesclean.twilio;
 
+import ao.martins.shoesclean.domain.model.PedidoMensagem;
+import ao.martins.shoesclean.domain.service.NotificacaoService;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class TwilioAPI {
+public class TwilioService implements NotificacaoService {
 
     @Autowired
     private TwilioProperties twilioProperties;
 
-    public void sendMessage(String to){
-
+    @Override
+    public void enviarMensagem(PedidoMensagem pedidoMensagem) {
         Message.creator(
-                new PhoneNumber(to),
+              new PhoneNumber(  pedidoMensagem.getDestinatario()),
                 new PhoneNumber(twilioProperties.getNumber()),
-                "TESTETT"
+                pedidoMensagem.getCorpo()
 
         ).create();
     }

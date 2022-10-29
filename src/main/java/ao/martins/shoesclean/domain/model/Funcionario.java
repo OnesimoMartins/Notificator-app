@@ -1,13 +1,31 @@
 package ao.martins.shoesclean.domain.model;
 
+import javax.persistence.*;
 
-public class Funcionario {
+import lombok.*;
 
-	Long id;
+@Entity
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+public class Funcionario  {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
-	String primeiroNome;
+	private String nome;
 	
-	String ultimoNome;
+	private String sobrenome;
 	
-	String password;
+	private String password;
+
+	@OneToOne
+	private Cargo cargo;
+
+	@Column(name = "numero_telefone")
+	private String telefone;
+
 }
