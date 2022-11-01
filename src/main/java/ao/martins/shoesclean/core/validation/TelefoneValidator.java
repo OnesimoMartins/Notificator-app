@@ -8,13 +8,10 @@ import javax.validation.ConstraintValidatorContext;
 
 public class TelefoneValidator implements ConstraintValidator<NumeroTelefone,String> {
 
-    @Autowired
-    private FuncionarioService funcionarioService;
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-    return  ValidationUtils.isNumeroTelefone(value) &&
-            funcionarioService.getFuncionarioByTelefoneOrNull(value)==null;
+    return  ValidationUtils.isNumeroTelefone(value) ;
     }
     
 }

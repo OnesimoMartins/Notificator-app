@@ -1,10 +1,9 @@
 package ao.martins.shoesclean.domain.service;
 
-import ao.martins.shoesclean.api.dto.response.PedidoResponse;
-import ao.martins.shoesclean.core.validation.TelefoneValidator;
+
 import ao.martins.shoesclean.domain.exception.PedidoJaConcluidoException;
 import ao.martins.shoesclean.domain.filter.PedidoFiltro;
-import static ao.martins.shoesclean.domain.specifications.PedidoSpecifications.*;
+import static ao.martins.shoesclean.domain.specifications.PedidoSpecifications.comFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,10 +11,8 @@ import org.springframework.stereotype.Service;
 import ao.martins.shoesclean.domain.model.Pedido;
 import ao.martins.shoesclean.domain.model.StatusPedido;
 import ao.martins.shoesclean.domain.repository.PedidoRepository;
-//static import ao.martins.
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.Predicate;
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 
 @Service
 public class PedidoService {
@@ -36,12 +33,11 @@ public class PedidoService {
                         String.format("clinete com o id '%s' não encontrado ",id)));
     }
 
+    @Transactional
     public Pedido criarPedido(Pedido pedido){
-
         pedido.setStatus(StatusPedido.CRIADO);
         clienteService.salvarOuActualizar(pedido.getCliente());
         return pedidoRepository.save(pedido);
-
     }
 
     public Pedido concluirPedido(Pedido pedido){
@@ -50,34 +46,17 @@ public class PedidoService {
            throw new PedidoJaConcluidoException("o pedido com o id '"+pedido.getId()+
           "' já foi maracado como concluido.");
 //TODO  alter status pedido
+
         return pedidoRepository.save(pedido);
     }
 
     public Page<Pedido> ProcurarPedido(PedidoFiltro filtro, Pageable pageable) {
-
-//        var predicates =new ArrayList<Predicate>();
-//
-//        if(filtro.getNomeCliente()!=null)
-//            predicates.add(comNumeroTelefoneClienteTipo(filtro.getNumeroTelefoneCliente())
-//                    );
-
-   return  pedidoRepository.findAll(
+        return  pedidoRepository.findAll(
           comFiltro(filtro),pageable);
 
     }
 
-
 }
 
-//    public Page<Pedido> procuraPedidoPorNomeCliente(String value) {
-//
-//        return t
-//
-//    }
-//    public Page<Pedido> procuraPedidoPorNumeroCliente(String value) {
-//
-//        return t
-//
-//    }
 
 

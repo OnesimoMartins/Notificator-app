@@ -10,8 +10,9 @@ import java.time.LocalDateTime;
 public class ErrorResponse {
 
     @Builder.Default
-    private LocalDateTime timestamp=LocalDateTime.now();
-    private int status;
-    private String tittle;
-    private String details;
+    private final LocalDateTime timestamp=LocalDateTime.now();
+    private final String code;
+    private final int status;
+    private final String tittle;
+    private final String details;
 }

@@ -2,6 +2,7 @@ package ao.martins.shoesclean.api.mapper;
 
 import ao.martins.shoesclean.api.dto.input.FuncionarioInput;
 import ao.martins.shoesclean.api.dto.response.FuncionarioResponse;
+import ao.martins.shoesclean.core.utils.FuncionarioUtlis;
 import ao.martins.shoesclean.domain.model.Cargo;
 import ao.martins.shoesclean.domain.model.Funcionario;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class FuncionarioMapper {
+public class FuncionarioMapper implements FuncionarioUtlis {
 
     private final CargoMapper cargoMapper;
 
@@ -34,6 +35,7 @@ public class FuncionarioMapper {
               .build();
     }
 
+    @Override
     public Funcionario copiarPropriedades(Funcionario origem, Funcionario destino) {
 
         if(origem.getId()!=null)

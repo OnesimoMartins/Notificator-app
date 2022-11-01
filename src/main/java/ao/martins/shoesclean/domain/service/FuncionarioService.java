@@ -1,6 +1,8 @@
 package ao.martins.shoesclean.domain.service;
 
 import ao.martins.shoesclean.core.security.AuthFuncionario;
+import ao.martins.shoesclean.core.utils.FuncionarioUtlis;
+import ao.martins.shoesclean.domain.exception.NumeroTelefoneJaEmUsoException;
 import ao.martins.shoesclean.domain.exception.PalavraPasseIncorrectaExepion;
 import ao.martins.shoesclean.domain.repository.CargoRepository;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class FuncionarioService implements UserDetailsService {
 
+	private final FuncionarioUtlis funcionarioUtlis;
 	private final FuncionarioRepository funcionarios;
 	private final CargoRepository cargos;
 
@@ -26,12 +29,25 @@ public class FuncionarioService implements UserDetailsService {
 		return  this.funcionarios.findFuncionarioByTelefone(tlfn).orElse(null);
 	}
 	public Funcionario salvarFuncionario(Funcionario f) {
-
 		var cargo= cargos.findById(f.getCargo().getId()).orElseThrow(
 				()-> new EntityNotFoundException("cargo com id '"+f.getCargo().getId()+"' não encotrado"));
 		f.setCargo(cargo);
-
 		return funcionarios.save(f);
+	}
+
+	public  Funcionario actualizarFuncionario(Funcionario novo, Funcionario antigo){
+
+		var funcionarioComTelefone
+				=this.funcionarios.findFuncionarioByTelefone(novo.getTelefone());
+
+		if(!novo.equals(antigo) && funcionarioComTelefone.isPresent()
+		&& !funcionarioComTelefone.get().equals(novo)) throw  new NumeroTelefoneJaEmUsoException(""" 
+   Este número de telefone '%s' já esta a ser utilizado por outro funcionário.
+   """.formatted(novo.getTelefone()));
+
+		this.funcionarioUtlis.copiarPropriedades(novo,antigo);
+
+		return funcionarios.save(antigo);
 	}
 
     public Funcionario funcionarioByIdOrThrows(Long id) {

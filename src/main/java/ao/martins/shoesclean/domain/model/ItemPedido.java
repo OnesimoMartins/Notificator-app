@@ -18,4 +18,8 @@ public class ItemPedido {
     @Id
     private String id;
     private String descricao;
+
+    public ItemPedido(String descricao){
+        this.descricao=descricao;
+    }
 }

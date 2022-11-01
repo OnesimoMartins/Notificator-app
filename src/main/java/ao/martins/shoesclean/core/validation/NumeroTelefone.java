@@ -1,5 +1,7 @@
 package ao.martins.shoesclean.core.validation;
 
+import ao.martins.shoesclean.api.dto.input.FuncionarioInput;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -16,7 +18,7 @@ public @interface NumeroTelefone {
     
     String message() default "Número de telefone inválido.";
 
-	Class<?>[] groups() default { };
+	Class<?>[] groups() default {};
 
 	Class<? extends Payload>[] payload() default { };
 	

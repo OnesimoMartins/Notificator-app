@@ -7,9 +7,11 @@ import ao.martins.shoesclean.domain.model.StatusPedido;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Builder
+@ToString
 public class PedidoResponse {
 
     private final Long id;

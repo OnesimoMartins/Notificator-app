@@ -1,7 +1,7 @@
 package ao.martins.shoesclean.domain.model;
 
 public enum StatusPedido {
-CRIADO,CONCLUIDO,CANCELADO;
+CRIADO,CONCLUIDO;
 
     public static StatusPedido fromString( String str){
       if(str.equalsIgnoreCase("criado"))
@@ -9,8 +9,8 @@ CRIADO,CONCLUIDO,CANCELADO;
      if(str.equalsIgnoreCase("CONCLUIDO"))
             return CONCLUIDO;
 
-     if(str.equalsIgnoreCase("CANCELADO"))
-            return CANCELADO;
+//     if(str.equalsIgnoreCase("CANCELADO"))
+//            return CANCELADO;
 
    throw new IllegalArgumentException(str+" é inválido para o Enum StatusPedido");
     }

@@ -35,11 +35,11 @@ public class PedidoSpecifications {
               predicates.add(criteriaBuilder.like(root.get("cliente")
                       .get("nome"), ("%"+filtro.getNomeCliente()+"%")));
 
-            if (filtro.getNumeroTelefoneCliente()!=null)
+          if (filtro.getNumeroTelefoneCliente()!=null)
                 predicates.add(criteriaBuilder.like(root.get("cliente")
                         .get("numeroTelefone"), ("%"+filtro.getNumeroTelefoneCliente()+"%")));
 
-            if (filtro.getStatus()!=null)
+          if (filtro.getStatus()!=null)
                 predicates.add(criteriaBuilder.equal
                         (root.get("status"), filtro.getStatus()));
 

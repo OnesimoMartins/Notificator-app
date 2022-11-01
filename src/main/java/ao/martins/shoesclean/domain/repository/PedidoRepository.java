@@ -15,14 +15,8 @@ import java.util.List;
 
 public interface PedidoRepository extends JpaRepository<Pedido,Long>
         , JpaSpecificationExecutor<Pedido> {
-
     @Override
     @EntityGraph(type = EntityGraph.EntityGraphType.FETCH,value = "pedido_items_graph")
     Page<Pedido> findAll(Specification spec, Pageable pageable);
 
-    @Override
-    <S extends Pedido> List<S> findAll(Example<S> example);
-    //    Page<Pedido> pesquisarPorNomeCliente(String nome);
-//
-//    Page<Pedido> pesquisarPorNumeroCliente(String numero);
 }

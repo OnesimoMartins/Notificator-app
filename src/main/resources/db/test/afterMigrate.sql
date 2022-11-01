@@ -28,6 +28,8 @@ insert into item_pedido(pedido_id,descricao) values
 
 insert into funcionario(nome,sobrenome,numero_telefone,password,cargo_id) values
 ('Aurio','suchel','923456876','1',2),('helena','Batista','913456876','encode',1),
-('Mauro','Pinto','943456876','encode',1),('Rogerio','Menezes','953456876','encode',1);
+('Mauro','Pinto','943456876','encode',1),('Rogerio','Menezes','953456876','encode',1)
+,('Rogerio','Menezes','953450876','encode',1),('Rogerio','Menezes','953456817','encode',1)
+,('Rogerio','Menezes','953456674','encode',1);
 
 --insert into cargo(descricao) values("Administrador"),("Funcionário");

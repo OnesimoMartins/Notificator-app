@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import ao.martins.shoesclean.api.dto.response.PedidoResponse;
 import ao.martins.shoesclean.domain.filter.PedidoFiltro;
-import ao.martins.shoesclean.domain.model.Pedido;
 import ao.martins.shoesclean.domain.repository.PedidoRepository;
 import ao.martins.shoesclean.domain.specifications.PedidoSpecifications;
 import lombok.AllArgsConstructor;
@@ -16,7 +15,6 @@ import org.springframework.data.web.PageableDefault;
 import ao.martins.shoesclean.api.dto.input.PedidoInput;
 import ao.martins.shoesclean.api.mapper.PedidoMapper;
 import ao.martins.shoesclean.domain.service.PedidoService;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("pedidos")
-@CrossOrigin
 @AllArgsConstructor
 public class PedidoController {
 
@@ -54,9 +51,12 @@ public Page<PedidoResponse> listarPedidos(
            .map(pedidoMapper::toPedidoResponse);
 }
    @PostMapping
-   public Pedido criarPedido(@RequestBody @Valid  PedidoInput pedidoInput){
-     return pedidoService
+   public PedidoResponse criarPedido(@RequestBody @Valid  PedidoInput pedidoInput){
+     var pedido= pedidoService
              .criarPedido(this.pedidoMapper.toPedido(pedidoInput));
+
+
+      return pedidoMapper.toPedidoResponse( pedido);
    }
 
 }
