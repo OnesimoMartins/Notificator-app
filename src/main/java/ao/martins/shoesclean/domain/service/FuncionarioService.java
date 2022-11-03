@@ -30,7 +30,7 @@ public class FuncionarioService implements UserDetailsService {
 		return  this.funcionarios.findFuncionarioByTelefone(tlfn).orElse(null);
 	}
 
-	public Funcionario bloqueiarFuncionario(Long id){
+	public Funcionario bloquearFuncionario(Long id){
 		var funcionario=getFuncionarioByIdOrThrows(id);
 
 
@@ -99,5 +99,9 @@ public class FuncionarioService implements UserDetailsService {
 		return  this.funcionarios.findFuncionarioByTelefone(telefone)
 				.map(AuthFuncionario::new).orElseThrow(()->
 						new UsernameNotFoundException("numero de telefone ou password inválido"));
+	}
+
+	public void apagarFuncionario(Long id) {
+	this.funcionarios.delete(	this.getFuncionarioByIdOrThrows(id));
 	}
 }

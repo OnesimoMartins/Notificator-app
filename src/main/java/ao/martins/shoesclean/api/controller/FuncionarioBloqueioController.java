@@ -21,7 +21,7 @@ public class FuncionarioBloqueioController {
 
 	@PutMapping("{id}/bloqueio")
 	public FuncionarioResponse bloquearFuncionario(@PathVariable Long id) {
-		Funcionario funcionario= funcionarioService.bloqueiarFuncionario(id);
+		Funcionario funcionario= funcionarioService.bloquearFuncionario(id);
 	 return funcionarioMapper.toFuncionarioresponse(funcionario) ;
 	}
 

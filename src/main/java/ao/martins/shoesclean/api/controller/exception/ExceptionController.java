@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import ao.martins.shoesclean.api.dto.response.ErrorResponse;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -56,6 +57,18 @@ public class ExceptionController extends ResponseEntityExceptionHandler{
                 .build();
 
         return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+    @ExceptionHandler(EntityNotFoundException.class)
+    protected ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex,
+                                                                         WebRequest request) {
+        var problem=ErrorResponse.builder()
+                .status(404)
+                .code("C-01")
+                .details(ex.getMessage())
+                .tittle("Entidade não encontrada")
+                .build();
+
+        return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.valueOf(404), request);
     }
     @ExceptionHandler(PalavraPasseIncorrectaExepion.class)
     protected ResponseEntity<Object> handlePalavraPasseIncorrectaExepion(PalavraPasseIncorrectaExepion ex,

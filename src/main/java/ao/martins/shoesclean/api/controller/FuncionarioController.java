@@ -13,14 +13,7 @@ import ao.martins.shoesclean.api.dto.input.FuncionarioInput;
 import ao.martins.shoesclean.api.dto.response.FuncionarioResponse;
 import ao.martins.shoesclean.domain.model.Funcionario;
 import ao.martins.shoesclean.domain.service.FuncionarioService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -72,10 +65,16 @@ public class FuncionarioController {
 	}
 
 	@GetMapping("{id}")
-	public FuncionarioResponse findFuncionario(@PathVariable Long id){
+	public FuncionarioResponse encontrarFuncionario(@PathVariable Long id){
 		return funcionarioMapper.toFuncionarioresponse(
 				this.funcionarioService.getFuncionarioByIdOrThrows(id));
 	}
+	@DeleteMapping("{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void apagarFuncionario(@PathVariable Long id){
+	funcionarioService.apagarFuncionario(id);
+	}
+
 	@GetMapping
 	public Page<FuncionarioResponse> pageFuncionarios(Pageable pageable) {
 		return this.funcionarioRepository.findAll(pageable)
