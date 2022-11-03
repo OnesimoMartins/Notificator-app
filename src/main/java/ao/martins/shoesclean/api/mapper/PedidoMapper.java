@@ -20,7 +20,7 @@ public class PedidoMapper {
 
     public Pedido toPedido( PedidoInput input){
         var pedido=new Pedido();
-        pedido.setCliente( new Cliente(input.getNome(),input.getNumero()));
+        pedido.setCliente( new Cliente(input.getNumero(),input.getNome()));
         pedido.setItems(input.getItens().stream().map(ItemPedido::new).toList());
         return pedido;
     }

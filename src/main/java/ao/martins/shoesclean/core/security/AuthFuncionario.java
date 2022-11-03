@@ -40,7 +40,7 @@ public class AuthFuncionario  implements UserDetails {
     @Override
     public boolean isAccountNonLocked() {
 //        TODO : alterar quando o admin bloquar a conta
-        return true;
+        return !this.funcionario.isFuncionarioBloqueado();
     }
 
     @Override

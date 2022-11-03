@@ -25,6 +25,8 @@ public class Funcionario  {
 	
 	private String password;
 
+	private boolean isFuncionarioBloqueado;
+
 	@OneToOne
 	private Cargo cargo;
 

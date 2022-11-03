@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 import javax.validation.Valid;
 
@@ -50,14 +49,14 @@ public class FuncionarioController {
 			@PathVariable Long id, @Validated(FuncionarioInput.ActualizarFuncionario.class)
 	@RequestBody FuncionarioInput input) {
 
-		var funcionario=funcionarioService.funcionarioByIdOrThrows(id);
+		var funcionario=funcionarioService.getFuncionarioByIdOrThrows(id);
 
 		var funcionarioNovo=funcionarioMapper.toFuncionario(input);
 		funcionarioNovo.setId(id);
 
 		return funcionarioMapper.toFuncionarioresponse(
 				funcionarioService.actualizarFuncionario(funcionarioNovo,funcionario)
-		) ;
+		);
 
 	}
 
@@ -75,7 +74,7 @@ public class FuncionarioController {
 	@GetMapping("{id}")
 	public FuncionarioResponse findFuncionario(@PathVariable Long id){
 		return funcionarioMapper.toFuncionarioresponse(
-				this.funcionarioService.funcionarioByIdOrThrows(id));
+				this.funcionarioService.getFuncionarioByIdOrThrows(id));
 	}
 	@GetMapping
 	public Page<FuncionarioResponse> pageFuncionarios(Pageable pageable) {

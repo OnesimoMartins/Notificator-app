@@ -32,6 +32,7 @@ public class FuncionarioMapper implements FuncionarioUtlis {
                 .sobrenome(f.getSobrenome())
               .cargo(this.cargoMapper.toCargoResponse(f.getCargo()))
                 .id(f.getId()).telefone(f.getTelefone())
+              .isBloqueado(f.isFuncionarioBloqueado())
               .build();
     }
 

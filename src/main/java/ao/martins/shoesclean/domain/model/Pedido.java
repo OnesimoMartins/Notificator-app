@@ -1,17 +1,6 @@
 package ao.martins.shoesclean.domain.model;
 
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedEntityGraph;
-import javax.persistence.OneToOne;
-import javax.persistence.GenerationType;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
-import javax.persistence.PostPersist;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import ao.martins.shoesclean.domain.event.PedidoConcluidoEvent;
 import lombok.AllArgsConstructor;
@@ -37,14 +26,14 @@ public class Pedido extends AbstractAggregateRoot<Pedido> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne()
+	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status;
 
-	@OneToMany()
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")
 	private List<ItemPedido> items;
 

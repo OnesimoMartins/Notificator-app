@@ -52,6 +52,8 @@ public Page<PedidoResponse> listarPedidos(
 }
    @PostMapping
    public PedidoResponse criarPedido(@RequestBody @Valid  PedidoInput pedidoInput){
+
+
      var pedido= pedidoService
              .criarPedido(this.pedidoMapper.toPedido(pedidoInput));
 

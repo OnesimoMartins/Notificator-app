@@ -48,7 +48,7 @@ public class FuncionarioServiceTest {
 	public void deve_Alterar_palavra_passe_dados_parametro_corretos(){
 		Mockito.when(funcionarioRepository.findById(1L)).thenReturn(Optional.of(
 				new Funcionario(1L,"crisnaldo",
-						"Mendes","1234",null,"931897267")));
+						"Mendes","1234",true,null,"931897267")));
 		assertDoesNotThrow(
 				()->	this.fService.mudarPalavraPasse(1L,"1234","crispill")
 	 );
@@ -58,7 +58,7 @@ public class FuncionarioServiceTest {
 	public void deve_lancar_excessao_dados_parametro_Incorretos(){
 		Mockito.when(funcionarioRepository.findById(1L)).thenReturn(Optional.of(
 				new Funcionario(1L,"crisnaldo",
-						"Mendes","134",null,"931897267")));
+						"Mendes","134",true,null,"931897267")));
 		assertThrows(PalavraPasseIncorrectaExepion.class,
 				()->	this.fService.mudarPalavraPasse(1L,"1234","crispill")
 		);

@@ -7,19 +7,16 @@ import javax.validation.constraints.NotEmpty;
 
 import ao.martins.shoesclean.core.validation.NumeroTelefone;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@ToString
 @NoArgsConstructor
 public class PedidoInput {
 
     @NotBlank
-//    @JsonProperty
     private String nome;
 
     @NumeroTelefone

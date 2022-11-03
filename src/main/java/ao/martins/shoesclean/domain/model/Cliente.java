@@ -9,13 +9,12 @@ import lombok.*;
 @Entity
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Cliente {
-
     @Id
     private String numeroTelefone;
-
     private String nome;
+
 
 }

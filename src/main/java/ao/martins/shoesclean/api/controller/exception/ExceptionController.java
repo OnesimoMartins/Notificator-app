@@ -1,6 +1,7 @@
 package ao.martins.shoesclean.api.controller.exception;
 
 import ao.martins.shoesclean.domain.exception.NumeroTelefoneJaEmUsoException;
+import ao.martins.shoesclean.domain.exception.OperacaoNaoPermitidaException;
 import ao.martins.shoesclean.domain.exception.PalavraPasseIncorrectaExepion;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,19 @@ public class ExceptionController extends ResponseEntityExceptionHandler{
                 .code("A-02")
                 .details("O número fornecido ja está a ser utilizado por outro funcionário.")
                 .tittle("Número de telefone em uso")
+                .build();
+
+        return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(OperacaoNaoPermitidaException.class)
+    protected ResponseEntity<Object> handleOperacaoNaoPermitidaException(OperacaoNaoPermitidaException ex,
+                                                                          WebRequest request) {
+        var problem=ErrorResponse.builder()
+                .status(400)
+                .code("C-00")
+                .details(ex.getMessage())
+                .tittle("Operação não permitida")
                 .build();
 
         return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);

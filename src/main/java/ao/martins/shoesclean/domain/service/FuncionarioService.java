@@ -3,6 +3,7 @@ package ao.martins.shoesclean.domain.service;
 import ao.martins.shoesclean.core.security.AuthFuncionario;
 import ao.martins.shoesclean.core.utils.FuncionarioUtlis;
 import ao.martins.shoesclean.domain.exception.NumeroTelefoneJaEmUsoException;
+import ao.martins.shoesclean.domain.exception.OperacaoNaoPermitidaException;
 import ao.martins.shoesclean.domain.exception.PalavraPasseIncorrectaExepion;
 import ao.martins.shoesclean.domain.repository.CargoRepository;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,31 @@ public class FuncionarioService implements UserDetailsService {
 	public Funcionario getFuncionarioByTelefoneOrNull(String tlfn){
 		return  this.funcionarios.findFuncionarioByTelefone(tlfn).orElse(null);
 	}
+
+	public Funcionario bloqueiarFuncionario(Long id){
+		var funcionario=getFuncionarioByIdOrThrows(id);
+
+
+		if(funcionario.isFuncionarioBloqueado())
+			throw  new OperacaoNaoPermitidaException("""
+			 O funcionário solicitado já se encontra bloqueado.
+					""");
+
+		funcionario.setFuncionarioBloqueado(true);
+		return funcionarios.save(funcionario);
+	}
+	public Funcionario desbloquearFuncionario(Long id){
+		var funcionario=getFuncionarioByIdOrThrows(id);
+
+		if(!funcionario.isFuncionarioBloqueado())
+			throw  new OperacaoNaoPermitidaException("""
+			 O funcionário solicitado já se encontra  desbloqueado.
+					""");
+
+		funcionario.setFuncionarioBloqueado(false);
+		return funcionarios.save(funcionario);
+	}
+
 	public Funcionario salvarFuncionario(Funcionario f) {
 		var cargo= cargos.findById(f.getCargo().getId()).orElseThrow(
 				()-> new EntityNotFoundException("cargo com id '"+f.getCargo().getId()+"' não encotrado"));
@@ -50,7 +76,7 @@ public class FuncionarioService implements UserDetailsService {
 		return funcionarios.save(antigo);
 	}
 
-    public Funcionario funcionarioByIdOrThrows(Long id) {
+    public Funcionario getFuncionarioByIdOrThrows(Long id) {
 		return this.funcionarios.findById(id).orElseThrow(
 				()->new EntityNotFoundException("Funcionario com o id "+id+
 						" não foi encontrado.")
@@ -58,7 +84,7 @@ public class FuncionarioService implements UserDetailsService {
     }
 
 	public void mudarPalavraPasse(Long funcionarioId,String actual,String nova) {
-	  Optional.of(funcionarioByIdOrThrows(funcionarioId)).ifPresent(it->{
+	  Optional.of(getFuncionarioByIdOrThrows(funcionarioId)).ifPresent(it->{
 		  if (actual.equals(it.getPassword())){
 			  it.setPassword(nova);
 			  this.funcionarios.save(it);

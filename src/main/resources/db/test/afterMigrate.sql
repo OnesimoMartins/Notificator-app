@@ -21,10 +21,10 @@ insert into pedido(cliente_id,status) values
 ,("913456623",'CRIADO'),('920876879','CRIADO'),("932768904",'CRIADO'),('956789012','CRIADO')
 ,("923655467",'CRIADO'),("94789098",'CRIADO');
 
-insert into item_pedido(pedido_id,descricao) values
-( 1,'nike air force preta'),(2,'jordan 2001 (azul)'),(2,'sapato castanho'),
-(3,'sapato preto tamnho 23'),(4,'nike f4 tamnho 23'),(5,'sebago amarelo')
-,(6,'snadalhas'),(7,'tenis'),( 8,'Adidas');
+insert into item_pedido(id,pedido_id,descricao) values
+("wuoeuqw", 1,'nike air force preta'),("yuio",2,'jordan 2001 (azul)'),("yuio2",2,'sapato castanho'),
+("yuio3",3,'sapato preto tamnho 23'),("yuio4",4,'nike f4 tamnho 23'),("yuio5",5,'sebago amarelo')
+,("yuio6",6,'snadalhas'),("yuio7",7,'tenis'),("yuio8",8,'Adidas');
 
 insert into funcionario(nome,sobrenome,numero_telefone,password,cargo_id) values
 ('Aurio','suchel','923456876','1',2),('helena','Batista','913456876','encode',1),
