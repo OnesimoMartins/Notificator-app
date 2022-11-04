@@ -20,7 +20,6 @@ public class PedidoService {
     private final ClienteService clienteService;
     private final PedidoRepository pedidoRepository;
 
-
     public PedidoService(ClienteService clienteService, PedidoRepository pedidoRepository){
         this.clienteService=clienteService;
         this.pedidoRepository=pedidoRepository;
@@ -43,9 +42,11 @@ public class PedidoService {
     public Pedido concluirPedido(Pedido pedido){
 
         if(pedido.getStatus().equals(StatusPedido.CONCLUIDO))
-           throw new PedidoJaConcluidoException("o pedido com o id '"+pedido.getId()+
-          "' já foi maracado como concluido.");
-//TODO  alter status pedido
+           throw new PedidoJaConcluidoException("""
+          o pedido com o id '%s' já foi maracado como concluido.""".formatted(pedido.getId()));
+
+        //TODO  alter status pedido
+        pedido.setStatus(StatusPedido.CONCLUIDO);
 
         return pedidoRepository.save(pedido);
     }

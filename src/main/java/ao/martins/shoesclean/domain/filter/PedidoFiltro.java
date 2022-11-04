@@ -9,6 +9,7 @@ import lombok.ToString;
 @Setter
 @Getter
 public class PedidoFiltro {
+
    private String nomeCliente;
    private String numeroTelefoneCliente;
    private StatusPedido status;

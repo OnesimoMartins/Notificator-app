@@ -33,31 +33,24 @@ public class PedidoController {
 
    @GetMapping("{id}")
    public PedidoResponse encontrarPedidoPorId(@PathVariable Long id){
-      return pedidoMapper.toPedidoResponse(this.pedidoService.procuraPedidoPorId(id));
+       return pedidoMapper.toPedidoResponse(this.pedidoService.procuraPedidoPorId(id));
    }
 
-@GetMapping
-public Page<PedidoResponse> listarPedidos(
+    @GetMapping
+    public Page<PedidoResponse> listarPedidos(
         @PageableDefault(direction = Sort.Direction.DESC,size = 5) Pageable pageable
-        ,PedidoFiltro filtro
-){
-   var page=
-           PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(),
+        ,PedidoFiltro filtro){
+
+      var page= PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(),
                    Sort.by(Sort.Order.desc("id")));
 
-   return  pedidoRepository.findAll(
-                   PedidoSpecifications.comFiltro(filtro),page)
-
+     return  pedidoRepository.findAll(PedidoSpecifications.comFiltro(filtro),page)
            .map(pedidoMapper::toPedidoResponse);
-}
+   }
    @PostMapping
    public PedidoResponse criarPedido(@RequestBody @Valid  PedidoInput pedidoInput){
-
-
      var pedido= pedidoService
              .criarPedido(this.pedidoMapper.toPedido(pedidoInput));
-
-
       return pedidoMapper.toPedidoResponse( pedido);
    }
 

@@ -1,7 +1,5 @@
 package ao.martins.shoesclean.domain.model;
 
-import com.twilio.type.PhoneNumber;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
