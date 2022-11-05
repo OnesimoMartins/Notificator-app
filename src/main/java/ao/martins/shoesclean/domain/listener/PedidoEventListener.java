@@ -9,7 +9,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 
 @Component
 @AllArgsConstructor
-public class PedidoEventsListener {
+public class PedidoEventListener {
 
     private PedidoService pedidoService;
 
