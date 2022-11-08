@@ -13,13 +13,13 @@ insert into cargo(descricao) values ('Funcionário'),('Administrador');
 
 insert into cliente(numero_telefone,nome) values
 ("923890765","Alfredo Mateus"),("913456623","Lucas Pedro"),("920876879","Marcos Abreu")
-,("932768904","Tomás Teles"),("956789012","Monteiro Cruz"),("94789098","Alberto Domingos")
+,("932768904","Tomás Teles"),("956789012","Monteiro Cruz"),("947890980","Alberto Domingos")
 ,("923655467","Paulo Jesus");
 
 insert into pedido(cliente_id,status) values
 ('923890765','CRIADO'),('923890765','CRIADO'),('923890765','CONCLUIDO')
 ,("913456623",'CRIADO'),('920876879','CRIADO'),("932768904",'CRIADO'),('956789012','CRIADO')
-,("923655467",'CRIADO'),("94789098",'CRIADO');
+,("923655467",'CRIADO'),("947890980",'CRIADO');
 
 insert into item_pedido(id,pedido_id,descricao) values
 ("wuoeuqw", 1,'nike air force preta'),("yuio",2,'jordan 2001 (azul)'),("yuio2",2,'sapato castanho'),
@@ -31,5 +31,3 @@ insert into funcionario(nome,sobrenome,numero_telefone,password,cargo_id) values
 ('Mauro','Pinto','943456876','encode',1),('Rogerio','Menezes','953456876','encode',1)
 ,('Rogerio','Menezes','953450876','encode',1),('Rogerio','Menezes','953456817','encode',1)
 ,('Rogerio','Menezes','953456674','encode',1);
-
---insert into cargo(descricao) values("Administrador"),("Funcionário");

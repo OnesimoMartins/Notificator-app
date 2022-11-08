@@ -2,7 +2,6 @@ package ao.martins.shoesclean.domain.model;
 
 import javax.persistence.*;
 
-import ao.martins.shoesclean.domain.event.PedidoConcluidoEvent;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.AbstractAggregateRoot;
@@ -37,9 +36,4 @@ public class Pedido extends AbstractAggregateRoot<Pedido> {
 	@JoinColumn(name = "pedido_id")
 	private List<ItemPedido> items;
 
-	@PostPersist
-	private void afterPersist(){
-		if(this.getStatus().equals(StatusPedido.CONCLUIDO))
-		    registerEvent( new PedidoConcluidoEvent(this));
-	}
 }

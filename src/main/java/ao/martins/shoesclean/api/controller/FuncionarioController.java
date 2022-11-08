@@ -2,6 +2,7 @@ package ao.martins.shoesclean.api.controller;
 
 import ao.martins.shoesclean.api.dto.input.NovaPalavraPasseInput;
 import ao.martins.shoesclean.api.mapper.FuncionarioMapper;
+import ao.martins.shoesclean.core.security.api.SecurityCheck;
 import ao.martins.shoesclean.domain.repository.FuncionarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,7 @@ public class FuncionarioController {
 	private final FuncionarioRepository funcionarioRepository;
 	
 	@PostMapping
+	@SecurityCheck.Funcionarios.PodeAcederFuncinarios
 	public FuncionarioResponse criarFuncionario( @RequestBody
 					@Validated(FuncionarioInput.CriarFuncionario.class) FuncionarioInput input) {
 
@@ -65,17 +67,20 @@ public class FuncionarioController {
 	}
 
 	@GetMapping("{id}")
+	@SecurityCheck.Funcionarios.PodeAcederFuncinarios
 	public FuncionarioResponse encontrarFuncionario(@PathVariable Long id){
 		return funcionarioMapper.toFuncionarioresponse(
 				this.funcionarioService.getFuncionarioByIdOrThrows(id));
 	}
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@SecurityCheck.Funcionarios.PodeAcederFuncinarios
 	public void apagarFuncionario(@PathVariable Long id){
 	funcionarioService.apagarFuncionario(id);
 	}
 
 	@GetMapping
+	@SecurityCheck.Funcionarios.PodeAcederFuncinarios
 	public Page<FuncionarioResponse> pageFuncionarios(Pageable pageable) {
 		return this.funcionarioRepository.findAll(pageable)
 				.map(funcionarioMapper::toFuncionarioresponse);

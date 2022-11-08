@@ -33,22 +33,20 @@ public class FuncionarioService implements UserDetailsService {
 	public Funcionario bloquearFuncionario(Long id){
 		var funcionario=getFuncionarioByIdOrThrows(id);
 
-
 		if(funcionario.isFuncionarioBloqueado())
-			throw  new OperacaoNaoPermitidaException("""
-			 O funcionário solicitado já se encontra bloqueado.
-					""");
+			throw  new OperacaoNaoPermitidaException(
+					"funcionário solicitado já se encontra bloqueado.");
 
 		funcionario.setFuncionarioBloqueado(true);
 		return funcionarios.save(funcionario);
 	}
+
 	public Funcionario desbloquearFuncionario(Long id){
 		var funcionario=getFuncionarioByIdOrThrows(id);
 
 		if(!funcionario.isFuncionarioBloqueado())
-			throw  new OperacaoNaoPermitidaException("""
-			 O funcionário solicitado já se encontra  desbloqueado.
-					""");
+			throw  new OperacaoNaoPermitidaException(
+					"O funcionário solicitado já se encontra  desbloqueado.");
 
 		funcionario.setFuncionarioBloqueado(false);
 		return funcionarios.save(funcionario);

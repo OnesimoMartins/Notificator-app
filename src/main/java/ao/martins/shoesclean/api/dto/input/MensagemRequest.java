@@ -1,7 +1,6 @@
 package ao.martins.shoesclean.api.dto.input;
 
 import ao.martins.shoesclean.core.validation.NumeroTelefone;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 

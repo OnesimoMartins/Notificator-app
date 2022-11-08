@@ -20,9 +20,7 @@ public class ClienteController {
     private final ClienteService clienteService;
     private final ClienteMapper clienteMapper;
     private final MensagemService mensagemService;
-
     private final MensagemMapper mensagemMapper;
-
 
     @GetMapping("{id}")
     public ClienteResponse clientePorId(@PathVariable String id){
@@ -31,10 +29,9 @@ public class ClienteController {
 
     @PostMapping("mensagem")
     public MensagemResponse enviarMensagem(@Valid @RequestBody MensagemRequest mensagemRequest){
-
         return mensagemMapper.toMensagemResponse(
                  mensagemService.salvarMensagem(mensagemMapper.toMensagem(mensagemRequest))
-       ) ;
+        ) ;
     }
 
 

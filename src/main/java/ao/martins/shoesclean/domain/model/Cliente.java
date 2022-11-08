@@ -15,6 +15,4 @@ public class Cliente {
     @Id
     private String numeroTelefone;
     private String nome;
-
-
 }

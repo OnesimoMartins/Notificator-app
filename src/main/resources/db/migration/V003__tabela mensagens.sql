@@ -1,7 +1,6 @@
-create table cargo(
-id smallint auto_increment,
-descricao varchar(100) not null,
+create table mensagem(
+id bigint auto_increment,
+data timestamp not null default now(),
+cliente_id varchar(12) not null references cliente(numero_telefone),
 primary key(id)
 );
-
-alter table funcionario add column cargo_id smallint not null references cargo(id);
