@@ -21,7 +21,7 @@ public class ClienteService {
     * não devem existir clientes com o mesmo número de telefone,
     * logo, quando já existe um cliente com o mesmo número, o seu nome é atualizado.
     * */
-    public Cliente salvarOuActualizar(Cliente cliente){
+    public final Cliente salvarOuActualizar(Cliente cliente){
 
        return this.clientes.findById(cliente.getNumeroTelefone()).map(it->{
 
@@ -33,7 +33,7 @@ public class ClienteService {
             ).get();
     }
 
-    public Cliente procuraPorNumeroTelefone(String numero){
+    public final Cliente procuraPorNumeroTelefone(String numero){
         return this.clientes.findById(numero)
                 .orElseThrow(()-> new EntityNotFoundException(
                         String.format("clinete com o número '%s' não encontrado ",numero)));

@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 @Service
 @AllArgsConstructor
 public class MensagemService {
-  private MensagemRepository mensagemRepository;
+  private final MensagemRepository mensagemRepository;
 
-    public Mensagem salvarMensagem(Mensagem mensagem){
+    public Mensagem salvarMensagem(final Mensagem mensagem){
         mensagem.setData(LocalDateTime.now());
         return mensagemRepository.save(mensagem);
     }

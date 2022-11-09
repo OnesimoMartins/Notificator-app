@@ -10,8 +10,6 @@ public class TwilioInitializer {
 
     @Autowired
     private TwilioProperties twilioProperties;
-
-
     @Bean
     public void init(){
         Twilio.init(twilioProperties.getSsid(),twilioProperties.getAuth());
