@@ -1,25 +1,26 @@
 package ao.martins.shoesclean.domain.view;
 
+import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Immutable;
-import org.hibernate.annotations.Subselect;
+import lombok.AllArgsConstructor;
 
-import javax.persistence.Entity;
+import java.math.BigInteger;
 
 /**
  * esta classe representa um resumo dos dados do banco de dados
  * nela é possivel sabermos a quantidade de istancias das entidades na BD
  * ideal para ser utilizado em dashboards
- *
  * **/
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Resumo {
-    private Long quantidadePedidos;
-    private Long quantidadePedidosPendentes;
-    private Long quantidadeClientes;
-    private Long quantidadeFuncionarios;
-    private Long quantidadeMensagens;
+    private BigInteger quantidadePedidos;
+    private BigInteger quantidadePedidosPendentes;
+    private BigInteger quantidadeClientes;
+    private BigInteger quantidadeFuncionarios;
+    private BigInteger quantidadeMensagens;
 }

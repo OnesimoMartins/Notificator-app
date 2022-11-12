@@ -7,6 +7,7 @@ import ao.martins.shoesclean.domain.filter.PedidoFiltro;
 import ao.martins.shoesclean.domain.repository.PedidoRepository;
 import ao.martins.shoesclean.domain.specifications.PedidoSpecifications;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -47,10 +48,11 @@ public class PedidoController {
      return  pedidoRepository.findAll(PedidoSpecifications.comFiltro(filtro),page)
            .map(pedidoMapper::toPedidoResponse);
    }
+
    @PostMapping
+   @CacheEvict(value = "resumo",allEntries = true)
    public PedidoResponse criarPedido(@RequestBody @Valid  PedidoInput pedidoInput){
-     var pedido= pedidoService
-             .criarPedido(this.pedidoMapper.toPedido(pedidoInput));
+     var pedido= pedidoService.criarPedido(this.pedidoMapper.toPedido(pedidoInput));
       return pedidoMapper.toPedidoResponse( pedido);
    }
 
