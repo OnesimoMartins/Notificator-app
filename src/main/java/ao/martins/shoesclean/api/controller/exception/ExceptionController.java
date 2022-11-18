@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import ao.martins.shoesclean.api.dto.response.ErrorResponse;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ExceptionController extends ResponseEntityExceptionHandler{
@@ -45,6 +44,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler{
 
         return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
+
 
     @ExceptionHandler(OperacaoNaoPermitidaException.class)
     protected ResponseEntity<Object> handleOperacaoNaoPermitidaException(OperacaoNaoPermitidaException ex,
@@ -82,12 +82,24 @@ public class ExceptionController extends ResponseEntityExceptionHandler{
 
         return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
+//    @ExceptionHandler(NegocioException.class)
+//    protected ResponseEntity<Object> handleNegocioException(NegocioException ex,
+//                                                                         WebRequest request) {
+//        var problem=ErrorResponse.builder()
+//                .status(500)
+//                .code("A-00")
+//                .details("A palavra passe incorrecta está incorrecta.")
+//                .tittle("Impossível ")
+//                .build();
+//
+//        return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+//    }
+
     // @Override
     // protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
     //         HttpStatus status, WebRequest request) {
-     
     //     body=ErrorResponse.builder().status(status.value()).
-
     //     return super.handleExceptionInternal(ex, body, headers, status, request);
     // }
+
 }

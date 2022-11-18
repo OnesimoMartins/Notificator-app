@@ -9,6 +9,7 @@ import org.springframework.data.domain.AbstractAggregateRoot;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor
@@ -31,6 +32,8 @@ public class Pedido extends AbstractAggregateRoot<Pedido> {
 
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status;
+
+	private LocalDateTime dataCriacao;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")

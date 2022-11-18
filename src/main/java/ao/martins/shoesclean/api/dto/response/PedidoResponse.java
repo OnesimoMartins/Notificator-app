@@ -17,11 +17,12 @@ public class PedidoResponse {
     private final Long id;
 
 	private final ClienteResponse cliente;
-	
-	private final LocalDateTime tempoCriacao;
 
 	@JsonProperty("status_pedido")
 	private final StatusPedido statusPedido;
+
+	@JsonProperty("data_criacao")
+	private LocalDateTime dataCriacao;
 
 	private final List<ItemPedidoResponse> items;
 }

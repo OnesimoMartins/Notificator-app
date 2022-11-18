@@ -17,7 +17,7 @@ create table funcionario(
 create table pedido(
     id int not null auto_increment,
     cliente_id varchar(12) not null references cliente(numero_telefone),
-    tempo_criacao timestamp not null default now(),
+    data_criacao timestamp not null default now(),
     status enum('CRIADO','CONCLUIDO','CANCELADO') not null default 'CRIADO',
     primary key(id)
 );

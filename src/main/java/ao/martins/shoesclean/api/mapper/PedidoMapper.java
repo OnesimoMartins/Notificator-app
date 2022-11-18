@@ -30,7 +30,7 @@ public class PedidoMapper {
                 .statusPedido(pedido.getStatus())
                 .id(pedido.getId())
                 .cliente(clienteMapper.toClienteResponse(pedido.getCliente()))
-
+                .dataCriacao(pedido.getDataCriacao())
                 .items(pedido.getItems().stream()
                         .map(it->new ItemPedidoResponse(it.getId(),it.getDescricao()))
                         .collect(Collectors.toList()))
