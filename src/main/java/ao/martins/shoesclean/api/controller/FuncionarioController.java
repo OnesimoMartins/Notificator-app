@@ -40,6 +40,7 @@ public class FuncionarioController {
 	}
 
 	@PutMapping("{id}")
+	@SecurityCheck.Funcionarios.PodeModificarFuncionario
 	public FuncionarioResponse alterarFuncionario(
 			@PathVariable Long id, @Validated(FuncionarioInput.ActualizarFuncionario.class)
 	@RequestBody FuncionarioInput input) {
@@ -58,6 +59,7 @@ public class FuncionarioController {
 
 	@PutMapping("/{id}/alterar-password")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@SecurityCheck.Funcionarios.FuncionarioProprietario
 	public void editarPalavraPasse(@PathVariable Long id,
 			@RequestBody @Valid NovaPalavraPasseInput novaPalavraPasseInput){
 
@@ -67,14 +69,14 @@ public class FuncionarioController {
 	}
 
 	@GetMapping("{id}")
-	@SecurityCheck.Funcionarios.PodeAcederFuncinarios
+	@SecurityCheck.Funcionarios.PodeAcederFuncinario
 	public FuncionarioResponse encontrarFuncionario(@PathVariable Long id){
 		return funcionarioMapper.toFuncionarioresponse(
 				this.funcionarioService.getFuncionarioByIdOrThrows(id));
 	}
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@SecurityCheck.Funcionarios.PodeAcederFuncinarios
+	@SecurityCheck.Funcionarios.PodeModificarFuncionario
 	public void apagarFuncionario(@PathVariable Long id){
 	funcionarioService.apagarFuncionario(id);
 	}

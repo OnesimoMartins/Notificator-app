@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import ao.martins.shoesclean.api.dto.response.ErrorResponse;
 
 import javax.persistence.EntityNotFoundException;
+import java.nio.file.AccessDeniedException;
 
 @Slf4j
 @ControllerAdvice
@@ -97,6 +98,18 @@ public class ExceptionController extends ResponseEntityExceptionHandler{
 //        return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 //    }
 
+//    @ExceptionHandler(AccessDeniedException.class)
+//    protected ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex, WebRequest request) {
+//
+//        var problem=ErrorResponse.builder()
+//                .status(500)
+//                .code("Z-00")
+//                .details("Erro interno do sevidor.Contacte alguém especializado para mais infromações.")
+//                .tittle("Erro Desnconhecido")
+//                .build();
+//
+//        return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+//    }
         @ExceptionHandler(Exception.class)
     protected ResponseEntity<Object> handleGlobalException(Exception ex, WebRequest request) {
 

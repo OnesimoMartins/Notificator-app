@@ -44,6 +44,5 @@ of orders and costumer notification on shoes clean company.Developed with Java u
 Link to the Frontend project : gg
 
 resolver o problema do refresh token;
-resolver o problema da autorizacao;
 configurar o bucket dos logs;
 tratar os erros back e front;

@@ -18,10 +18,27 @@ public @interface SecurityCheck {
         @Target(ElementType.METHOD)
         @interface PodeAcederFuncinarios{}
 
+        @PreAuthorize("@securityProvider.isIdFuncionarioAutenticado(#id)" +
+                " || @securityProvider.isAdministrador()")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        @interface PodeAcederFuncinario{}
+
+        @PreAuthorize("@securityProvider.isIdFuncionarioAutenticado(#id)" )
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        @interface FuncionarioProprietario{}
+
         @PreAuthorize("@securityProvider.isAdministrador()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface PodeBloquearOuDesbloquearFuncionario{}
+
+
+        @PreAuthorize("@securityProvider.isAdministrador() || @securityProvider.isIdFuncionarioAutenticado(#id) ")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        @interface PodeModificarFuncionario{}
 
 
     }
