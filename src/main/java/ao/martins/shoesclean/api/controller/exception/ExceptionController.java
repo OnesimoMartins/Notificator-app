@@ -3,6 +3,7 @@ package ao.martins.shoesclean.api.controller.exception;
 import ao.martins.shoesclean.domain.exception.NumeroTelefoneJaEmUsoException;
 import ao.martins.shoesclean.domain.exception.OperacaoNaoPermitidaException;
 import ao.martins.shoesclean.domain.exception.PalavraPasseIncorrectaExepion;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import ao.martins.shoesclean.api.dto.response.ErrorResponse;
 
 import javax.persistence.EntityNotFoundException;
 
+@Slf4j
 @ControllerAdvice
 public class ExceptionController extends ResponseEntityExceptionHandler{
 
@@ -95,6 +97,20 @@ public class ExceptionController extends ResponseEntityExceptionHandler{
 //        return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 //    }
 
+        @ExceptionHandler(Exception.class)
+    protected ResponseEntity<Object> handleGlobalException(Exception ex, WebRequest request) {
+
+        var problem=ErrorResponse.builder()
+                .status(500)
+                .code("Z-00")
+                .details("Erro interno do sevidor.Contacte alguém especializado para mais infromações.")
+                .tittle("Erro Desnconhecido")
+                .build();
+
+        log.error("{}",ex);
+
+        return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
     // @Override
     // protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
     //         HttpStatus status, WebRequest request) {

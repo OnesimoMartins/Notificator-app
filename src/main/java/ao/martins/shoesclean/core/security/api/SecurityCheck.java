@@ -11,13 +11,18 @@ import java.lang.annotation.Target;
 
 public @interface SecurityCheck {
 
-
     @interface Funcionarios{
 
         @PreAuthorize("@securityProvider.isAdministrador()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface PodeAcederFuncinarios{}
+
+        @PreAuthorize("@securityProvider.isAdministrador()")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        @interface PodeBloquearOuDesbloquearFuncionario{}
+
 
     }
 }

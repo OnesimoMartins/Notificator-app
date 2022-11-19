@@ -2,6 +2,7 @@ package ao.martins.shoesclean.api.controller;
 
 import ao.martins.shoesclean.api.dto.response.FuncionarioResponse;
 import ao.martins.shoesclean.api.mapper.FuncionarioMapper;
+import ao.martins.shoesclean.core.security.api.SecurityCheck;
 import ao.martins.shoesclean.domain.model.Funcionario;
 import ao.martins.shoesclean.domain.service.FuncionarioService;
 import lombok.AllArgsConstructor;
@@ -20,12 +21,14 @@ public class FuncionarioBloqueioController {
 	private final FuncionarioMapper funcionarioMapper;
 
 	@PutMapping("{id}/bloqueio")
+	@SecurityCheck.Funcionarios.PodeBloquearOuDesbloquearFuncionario
 	public FuncionarioResponse bloquearFuncionario(@PathVariable Long id) {
 		Funcionario funcionario= funcionarioService.bloquearFuncionario(id);
 	 return funcionarioMapper.toFuncionarioresponse(funcionario) ;
 	}
 
 	@DeleteMapping("{id}/bloqueio")
+	@SecurityCheck.Funcionarios.PodeBloquearOuDesbloquearFuncionario
 	public FuncionarioResponse desbloquearFuncionario(@PathVariable Long id) {
 		Funcionario funcionario= funcionarioService.desbloquearFuncionario(id);
 		return funcionarioMapper.toFuncionarioresponse(funcionario) ;

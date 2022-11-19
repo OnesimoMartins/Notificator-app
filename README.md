@@ -14,6 +14,9 @@ of orders and costumer notification on shoes clean company.Developed with Java u
 7. view a employees **[Must have administrator Authoritie]**
 8. Login access validation using Spring Security
 9. Athentication and authorization for users
+
+13. Observability with actuator
+14. Log storage with logly
 13. JWT Token Usage
 
 17. And additional features or functionality in both Backend and Frontend for better user usability
@@ -42,10 +45,5 @@ Link to the Frontend project : gg
 
 resolver o problema do refresh token;
 resolver o problema da autorizacao;
-configurar o spring actuator;
 configurar o bucket dos logs;
-remover o primengModule
-problema das datas pedidos
-problema do paramtro
-remover o proprio id
 tratar os erros back e front;
