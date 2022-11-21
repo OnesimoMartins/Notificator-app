@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
 import lombok.Getter;
@@ -33,6 +34,7 @@ public class Pedido extends AbstractAggregateRoot<Pedido> {
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status;
 
+	@CreationTimestamp
 	private LocalDateTime dataCriacao;
 
 	@OneToMany(cascade = CascadeType.ALL)

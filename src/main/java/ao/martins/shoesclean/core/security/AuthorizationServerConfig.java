@@ -28,7 +28,7 @@ import java.util.Map;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    private final int ACCESS_TOKEN_DUARION= (int)Duration.ofMinutes(950).toSeconds();
+    private final int ACCESS_TOKEN_DUARION= (int)Duration.ofHours(23).toSeconds();
     private final int REFRESH_TOKEN_DUARION= (int)Duration.ofDays(7).toSeconds();
 
     @Autowired
@@ -43,7 +43,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         tokenEnhacerChain.setTokenEnhancers(List.of(tokenEnhancer(),accessTokenConverter()));
 
         endpoints
-                .reuseRefreshTokens(true)
+                .reuseRefreshTokens(false)
                 .tokenStore(new InMemoryTokenStore())
                 .authenticationManager(authenticationManager)
                 .userDetailsService(funcionarioService)
