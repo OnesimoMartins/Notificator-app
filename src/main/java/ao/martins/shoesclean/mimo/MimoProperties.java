@@ -1,4 +1,4 @@
-package ao.martins.shoesclean.twilio;
+package ao.martins.shoesclean.mimo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,15 +12,13 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties("twilio")
-public class TwilioProperties {
+@ConfigurationProperties("mimo")
+public class MimoProperties {
 
     @NotBlank
-    private String ssid;
+    private String token;
 
     @NotBlank
-    private String auth;
+    private String sender;
 
-    @NotBlank
-    private String number;
 }

@@ -12,12 +12,12 @@ alter table funcionario auto_increment=1;
 insert into cargo(descricao) values ('Funcionário'),('Administrador');
 
 insert into cliente(numero_telefone,nome) values
-("923890765","Alfredo Mateus"),("913456623","Lucas Pedro"),("920876879","Marcos Abreu")
+("931897389","Alfredo Mateus"),("913456623","Lucas Pedro"),("920876879","Marcos Abreu")
 ,("932768904","Tomás Teles"),("956789012","Monteiro Cruz"),("947890980","Alberto Domingos")
 ,("923655467","Paulo Jesus");
 
 insert into pedido(cliente_id,status) values
-('923890765','CRIADO'),('923890765','CRIADO'),('923890765','CONCLUIDO')
+('931897389','CRIADO'),('923890765','CRIADO'),('923890765','CONCLUIDO')
 ,("913456623",'CRIADO'),('920876879','CRIADO'),("932768904",'CRIADO'),('956789012','CRIADO')
 ,("923655467",'CRIADO'),("947890980",'CRIADO');
 

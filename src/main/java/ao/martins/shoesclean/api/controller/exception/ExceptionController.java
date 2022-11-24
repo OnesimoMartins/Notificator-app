@@ -1,5 +1,6 @@
 package ao.martins.shoesclean.api.controller.exception;
 
+import ao.martins.shoesclean.domain.exception.NegocioException;
 import ao.martins.shoesclean.domain.exception.NumeroTelefoneJaEmUsoException;
 import ao.martins.shoesclean.domain.exception.OperacaoNaoPermitidaException;
 import ao.martins.shoesclean.domain.exception.PalavraPasseIncorrectaExepion;
@@ -85,31 +86,31 @@ public class ExceptionController extends ResponseEntityExceptionHandler{
 
         return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
-//    @ExceptionHandler(NegocioException.class)
-//    protected ResponseEntity<Object> handleNegocioException(NegocioException ex,
-//                                                                         WebRequest request) {
-//        var problem=ErrorResponse.builder()
-//                .status(500)
-//                .code("A-00")
-//                .details("A palavra passe incorrecta está incorrecta.")
-//                .tittle("Impossível ")
-//                .build();
-//
-//        return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
-//    }
+    @ExceptionHandler(NegocioException.class)
+    protected ResponseEntity<Object> handleNegocioException(NegocioException ex,
+                                                            WebRequest request) {
+        var problem=ErrorResponse.builder()
+                .status(500)
+                .code("B-00")
+                .details("A palavra passe incorrecta está incorrecta.")
+                .tittle("Impossível ")
+                .build();
 
-//    @ExceptionHandler(AccessDeniedException.class)
-//    protected ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex, WebRequest request) {
-//
-//        var problem=ErrorResponse.builder()
-//                .status(500)
-//                .code("Z-00")
-//                .details("Erro interno do sevidor.Contacte alguém especializado para mais infromações.")
-//                .tittle("Erro Desnconhecido")
-//                .build();
-//
-//        return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
-//    }
+        return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    protected ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex, WebRequest request) {
+
+        var problem=ErrorResponse.builder()
+                .status(500)
+                .code("B-01")
+                .details("Sem autorização para acder o recurso requisitado.")
+                .tittle("Não Autorizado")
+                .build();
+
+        return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
         @ExceptionHandler(Exception.class)
     protected ResponseEntity<Object> handleGlobalException(Exception ex, WebRequest request) {
 
@@ -120,7 +121,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler{
                 .tittle("Erro Desnconhecido")
                 .build();
 
-        log.error("{}",ex);
+            log.error(ex.getMessage(), ex);
 
         return this.handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }

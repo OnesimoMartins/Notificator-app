@@ -1,6 +1,7 @@
 package ao.martins.shoesclean.domain.listener;
 
 import ao.martins.shoesclean.domain.event.MensagemEvent;
+import ao.martins.shoesclean.domain.model.PedidoMensagem;
 import ao.martins.shoesclean.domain.repository.MensagemRepository;
 import ao.martins.shoesclean.domain.service.MensagemService;
 import ao.martins.shoesclean.domain.service.NotificacaoService;
@@ -12,12 +13,16 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class MensagemEventListener {
 
-   private MensagemService mensagemService;
+   private final MensagemService mensagemService;
+   private final NotificacaoService notificacaoService;
 
     @EventListener
     public  void mensagemCriada(MensagemEvent mensagemEvent){
 
-        // TODO usar o twillio para notificar
+        notificacaoService.enviarMensagem(PedidoMensagem.builder()
+                        .corpo(mensagemEvent.getMensagem().getCorpo())
+                        .destinatario(mensagemEvent.getMensagem().getCliente().getNumeroTelefone())
+                .build());
 
         mensagemService.salvarMensagem(mensagemEvent.getMensagem());
     }
