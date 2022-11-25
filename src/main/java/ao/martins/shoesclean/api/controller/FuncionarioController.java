@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 
 import ao.martins.shoesclean.api.dto.input.FuncionarioInput;
@@ -27,11 +28,15 @@ public class FuncionarioController {
 	private final FuncionarioService funcionarioService;
 	private final FuncionarioMapper funcionarioMapper;
 	private final FuncionarioRepository funcionarioRepository;
+
+	private final PasswordEncoder passwordEncoder;
 	
 	@PostMapping
 	@SecurityCheck.Funcionarios.PodeAcederFuncinarios
 	public FuncionarioResponse criarFuncionario( @RequestBody
 					@Validated(FuncionarioInput.CriarFuncionario.class) FuncionarioInput input) {
+
+		input.setPassword(passwordEncoder.encode(input.getPassword()));
 
 		Funcionario funcionario=
 				funcionarioService.salvarFuncionario( funcionarioMapper.toFuncionario(input));
@@ -56,12 +61,14 @@ public class FuncionarioController {
 
 	}
 
-
 	@PutMapping("/{id}/alterar-password")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@SecurityCheck.Funcionarios.FuncionarioProprietario
 	public void editarPalavraPasse(@PathVariable Long id,
 			@RequestBody @Valid NovaPalavraPasseInput novaPalavraPasseInput){
+
+		novaPalavraPasseInput.setPalavraPasseActual(passwordEncoder
+				.encode(novaPalavraPasseInput.getNovaPalavraPasse()));
 
 		this.funcionarioService.mudarPalavraPasse(id,novaPalavraPasseInput.getPalavraPasseActual(),
 				novaPalavraPasseInput.getNovaPalavraPasse()
